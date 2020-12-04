@@ -17,5 +17,6 @@ tmatrix_unique_words <- data.frame(matrix(nrow = length(unique_words),
                                    row.names = unique_words)
 colnames(tmatrix_unique_words) <- unique_words
 
-
+## have this matrix populated by Saturday/presentation Tuesday
+## write function to predict words by Tuesday 
 
