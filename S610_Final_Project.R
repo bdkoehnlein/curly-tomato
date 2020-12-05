@@ -14,7 +14,6 @@ next_word <- function(input_word, corpus, length, t_matrix = NULL) {
   }
   current_word <- input_word ## starts as your input word
   words <- c(input_word) ## make vector of words that contains output
-  print(t_matrix) 
   for(i in 1:length){
     ## cycle through number of words in the output
     in_word_i <- which(unique_words == current_word) ## search out vector of 
@@ -79,9 +78,20 @@ build_matrix <- function(words_vec, unique_words = NULL) {
   return(tmatrix_unique_words) 
 }
 
-faulkner_sample <- read_file("faulkner.txt")
+paragraph <- "We crossed ourselves and came away. In the little room downstairs
+we found Eliza seated in his arm-chair in state. I groped my way
+towards my usual chair in the corner while Nannie went to the
+sideboard and brought out a decanter of sherry and some
+wine-glasses. She set these on the table and invited us to take a
+little glass of wine. Then, at her sister's bidding, she filled out the
+sherry into the glasses and passed them to us. She pressed me to
+take some cream crackers also but I declined because I thought I
+would make too much noise eating them. She seemed to be
+somewhat disappointed at my refusal and went over quietly to the
+sofa where she sat down behind her sister. No one spoke: we all
+gazed at the empty fireplace."
 
-next_word(happy, dubliners, 5)
+next_word("and", paragraph, 5)
 
-next_word("send", "one, one, two, one, two, three, four, three, two.", 10)
+
 
