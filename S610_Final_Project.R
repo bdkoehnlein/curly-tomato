@@ -3,14 +3,22 @@ library(readr)
 dubliners <- read_file("http://www.gutenberg.org/files/2814/old/dblnr11.txt")
 
 next_word <- function(input_word, corpus, length, t_matrix = NULL) {
+  if(class(input_word) != "character" && class(corpus) != "character"){
+    stop("arguments not correct class (characters)")
+  }
   corp_vector <- unlist(strsplit(corpus, ## split on spaces and punctuation
                                  ## and turn list into vector
-                                 "\\, ?| |\\. |\\.|\\? |\\! |\" | \"|\' | \'| (|) | \\[|\\] |  |  "))
+                                 "\\, ?| |\\. |\\.|\\? |\\! |\" | \"|\' | \'| (|) | \\[|\\] |  |  |: "))
   unique_words <- unique(corp_vector) ## find the unique words
   
-  if (is.null(t_matrix) == T){ ## if don't define matrix in yourself, it'll 
+  if (is.null(t_matrix) == T){ ## if don't define matrix yourself, it'll 
     t_matrix <- build_matrix(corp_vector, unique_words) 
     ## create one using build_matrix
+  }
+  if(rowSums(t_matrix) != 1 
+     && length(unique_words) != nrow(t_matrix)
+     && length(unique_words) != ncol(t_matrix)){
+    stop("t_matrix is not a transition matrix")
   }
   current_word <- input_word ## starts as your input word
   words <- c(input_word) ## make vector of words that contains output
@@ -78,20 +86,7 @@ build_matrix <- function(words_vec, unique_words = NULL) {
   return(tmatrix_unique_words) 
 }
 
-paragraph <- "We crossed ourselves and came away. In the little room downstairs
-we found Eliza seated in his arm-chair in state. I groped my way
-towards my usual chair in the corner while Nannie went to the
-sideboard and brought out a decanter of sherry and some
-wine-glasses. She set these on the table and invited us to take a
-little glass of wine. Then, at her sister's bidding, she filled out the
-sherry into the glasses and passed them to us. She pressed me to
-take some cream crackers also but I declined because I thought I
-would make too much noise eating them. She seemed to be
-somewhat disappointed at my refusal and went over quietly to the
-sofa where she sat down behind her sister. No one spoke: we all
-gazed at the empty fireplace."
 
-next_word("and", paragraph, 5)
 
 
 
