@@ -1,5 +1,8 @@
 ## S610 Final Project
 
+library(readr)
+dubliners <- read_file("https://www.gutenberg.org/files/2814/2814-0.txt")
+
 ##############################
 ## Word Generating Function ##
 ##############################
@@ -13,7 +16,11 @@ next_word <- function(input_word, corpus, length, t_matrix = NULL) {
   
   ## Change text into a vector
   corp_vector <- unlist(strsplit(corpus,
-                                 "\\, ?| |\\. |\\.|\\? |\\! |\" | \"|\' | \'| (|) | \\[|\\] |  |  |: "))
+                                 "\\, ?| |\\. ?|\\.|\\? ?|\\! |" ?| ?"|\' ?| ?\'| ?\\(|\\) ?| ?\\[|\\] ?|  |  |: ?|; ?| ?\\\r ?| ?\\\n ?| ?_ ?"))
+  empty_str_i <- which(corp_vector == "")
+  
+  corp_vector <- corp_vector[-empty_str_i]
+  corp_vector
   
   ## find the unique words
   unique_words <- unique(corp_vector) 
@@ -121,7 +128,11 @@ smooth_next_words <- function(input_string, corpus, length, m = 1, t_matrix = NU
   }
   
   corp_vector <- unlist(strsplit(corpus,
-                                 "\\, ?| |\\. |\\.|\\? |\\! |\" | \"|\' | \'| (|) | \\[|\\] |  |  |: "))
+                                 "\\, ?| |\\. ?|\\.|\\? ?|\\! |" ?| ?"|\' ?| ?\'| ?\\(|\\) ?| ?\\[|\\] ?|  |  |: ?|; ?| ?\\\r ?| ?\\\n ?| ?_ ?"))
+  empty_str_i <- which(corp_vector == "")
+  
+  corp_vector <- corp_vector[-empty_str_i]
+  corp_vector
   
   ## Change the input string into a vector and make sure that it's at least as long as m
   input_vec <- unlist(strsplit(input_string, " "))
@@ -179,4 +190,4 @@ smooth_next_words <- function(input_string, corpus, length, m = 1, t_matrix = NU
   cat(vec)
 }
 
-
+next_word("He", dubliners, 20)
