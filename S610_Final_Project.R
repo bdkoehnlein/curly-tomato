@@ -1,8 +1,5 @@
 ## S610 Final Project
 
-library(readr)
-dubliners <- read_file("https://www.gutenberg.org/files/2814/2814-0.txt")
-
 ##############################
 ## Word Generating Function ##
 ##############################
@@ -16,7 +13,7 @@ next_word <- function(input_word, corpus, length, t_matrix = NULL) {
   
   ## Change text into a vector
   corp_vector <- unlist(strsplit(corpus,
-                                 "\\, ?| |\\. ?|\\.|\\? ?|\\! |" ?| ?"|\' ?| ?\'| ?\\(|\\) ?| ?\\[|\\] ?|  |  |: ?|; ?| ?\\\r ?| ?\\\n ?| ?_ ?"))
+                                 "\\, ?| |\\. ?|\\.|\\? ?|\\! |\" ?| ?\"|\' ?| ?\'| ?\\(|\\) ?| ?\\[|\\] ?|  |  |: ?|; ?| ?\\\r ?| ?\\\n ?| ?_ ?"))
   empty_str_i <- which(corp_vector == "")
   
   corp_vector <- corp_vector[-empty_str_i]
@@ -128,7 +125,7 @@ smooth_next_words <- function(input_string, corpus, length, m = 1, t_matrix = NU
   }
   
   corp_vector <- unlist(strsplit(corpus,
-                                 "\\, ?| |\\. ?|\\.|\\? ?|\\! |" ?| ?"|\' ?| ?\'| ?\\(|\\) ?| ?\\[|\\] ?|  |  |: ?|; ?| ?\\\r ?| ?\\\n ?| ?_ ?"))
+                                 "\\, ?| |\\. ?|\\.|\\? ?|\\! |\" ?| ?\"|\' ?| ?\'| ?\\(|\\) ?| ?\\[|\\] ?|  |  |: ?|; ?| ?\\\r ?| ?\\\n ?| ?_ ?"))
   empty_str_i <- which(corp_vector == "")
   
   corp_vector <- corp_vector[-empty_str_i]
@@ -190,4 +187,3 @@ smooth_next_words <- function(input_string, corpus, length, m = 1, t_matrix = NU
   cat(vec)
 }
 
-next_word("He", dubliners, 20)
